@@ -31,38 +31,55 @@ class PensionAge {
     }
   }
 
-  private $PensionData = null;
-  public function __construct(PensionData $PensionData) {
-    if(!($PensionData InstanceOf PensionData))
-      throw new Exception('Ugyldigt data brugt imod PensionAge.');
-
-    $this->PensionData = $PensionData;
+  private $data = null;
+  private $type = null;
+  public function __construct($data, $type='1') {
+    if(!($data InstanceOf PensionData) && !($data InstanceOf Date)) {
+      throw new Exception('Forkert data brugt imod PensionAge');
+    }
+    $this->data = $data;
+    $this->type = $type;
   }
 
-  public static function calculatedExpireDate(PensionData $PensionData) {
-    $age = new PensionAge($PensionData);
+  public static function calculatedExpireDate($data, $type='1') {
+    $age = new PensionAge($data, $type);
+    return $age->getCalculatedExpireDate();
+  }
+
+  public static function calculatedAge($data, $type='1') {
+    $age = new PensionAge($data, $type);
     return $age->getCalculatedExpireDate();
   }
 
   public function getCalculatedExpireDate() {
+    $type = ($this->data InstanceOf PensionData ? $this->data->type : $this->type);
+
     $result = null;
-    switch($this->PensionData->type) {
+    switch($type) {
       case 'T':
       case '1':
-        $result = new Date($this->PensionData->birthdate);
+        if($this->data InstanceOf PensionData) {
+          $result = new Date($this->PensionData->birthdate);
+        } else $result = $this->data;
+
         $result->year += $this->getCalculatedAge();
         break;
 
       default:
-        $result = $this->PensionData->expire_date;
+        if($this->data InstanceOf PensionData) {
+          $result = $this->PensionData->expire_date;
+        }
         break;
     }
     return $result;
   }
 
   public function getCalculatedAge() {
+    $type = ($this->data InstanceOf PensionData ? $this->data->type : $this->type);
+    $birthdate = ($this->data InstanceOf PensionData ? $this->PensionData->birthdate : $this->data);
+
     $ageEnd = 0;
-    switch($this->PensionData->type) {
+    switch($type) {
       case 'T':
         $ageEnd = 120;
         break;
@@ -72,7 +89,7 @@ class PensionAge {
 
         $ageEnd = 67;
         foreach($this->cache as $idx => $PensionAge) {
-          if($this->PensionData->birthdate->isAfter($PensionAge->from_date) && $this->PensionData->birthdate->isBefore($PensionAge->to_date)) {
+          if($birthdate->isAfter($PensionAge->from_date) && $birthdate->isBefore($PensionAge->to_date)) {
             $ageEnd = $PensionAge->age;
             break;
           }
