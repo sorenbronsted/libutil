@@ -59,7 +59,7 @@ class PensionAge {
       case 'T':
       case '1':
         if($this->data InstanceOf PensionData) {
-          $result = new Date($this->PensionData->birthdate);
+          $result = new Date($this->data->birthdate);
         } else $result = $this->data;
 
         $result->year += $this->getCalculatedAge();
@@ -67,7 +67,7 @@ class PensionAge {
 
       default:
         if($this->data InstanceOf PensionData) {
-          $result = $this->PensionData->expire_date;
+          $result = $this->data->expire_date;
         }
         break;
     }
@@ -76,7 +76,7 @@ class PensionAge {
 
   public function getCalculatedAge() {
     $type = ($this->data InstanceOf PensionData ? $this->data->type : $this->type);
-    $birthdate = ($this->data InstanceOf PensionData ? $this->PensionData->birthdate : $this->data);
+    $birthdate = ($this->data InstanceOf PensionData ? $this->data->birthdate : $this->data);
 
     $ageEnd = 0;
     switch($type) {
