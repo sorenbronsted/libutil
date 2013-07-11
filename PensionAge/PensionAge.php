@@ -48,7 +48,7 @@ class PensionAge {
 
   public static function calculatedAge($data, $type='1') {
     $age = new PensionAge($data, $type);
-    return $age->getCalculatedExpireDate();
+    return $age->getCalculatedAge();
   }
 
   public function getCalculatedExpireDate() {
