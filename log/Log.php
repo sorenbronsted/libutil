@@ -12,12 +12,12 @@ class Log {
 	const INFO  = 2;
 	const DEBUG = 3;
 
-	private static $levelTexts = [
+	private static $levelTexts = array(
 		self::ERROR => 'error',
 		self::WARN  => 'warn',
 		self::INFO  => 'info',
 		self::DEBUG => 'debug'
-	];		
+	);
 	private $levels = null;
 	private $defaultLevel = null;
 	private $writer = null;
