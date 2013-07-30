@@ -1,6 +1,6 @@
 <?php
 
-class Config {
+class Config2 {
 	private $values = null;
 	
 	public function __construct($file) {

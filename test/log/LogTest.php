@@ -23,7 +23,7 @@ class LogTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testCreateFromConfig() {
-		DiContainer::instance()->config = new Config("test/log/test.ini");
+		DiContainer::instance()->config = new Config2("test/log/test.ini");
 		$log = Log::createFromConfig();
 		$log->warn($this, "test1");
 		$this->assertEquals("warn:LogTest: test1", TestWriter::$buffer);
