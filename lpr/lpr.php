@@ -40,7 +40,9 @@ class lpr {
 
 		$output = array();
 		$error_file = sys_get_temp_dir().DIRECTORY_SEPARATOR.mt_rand().'.lpr';
-		exec('lpr '.implode(' ', $args).' '.implode(' ', $this->files).'  2> '.$error_file, $output, $return_var);
+		exec($cmd = 'lpr '.implode(' ', $args).' '.implode(' ', $this->files).'  2> '.$error_file, $output, $return_var);
+		
+		syslog(E_NOTICE, 'CMD: '.$cmd);
 
 		$error = trim(file_get_contents($error_file));
 
@@ -57,7 +59,7 @@ class lpr {
 			$this->data[$x] = $y;
 			return true;
 		}
-		return false;
+		throw new Exception('Variable '.$x.' does not exists.');
 	}
 
 	public function __get($x) {
