@@ -40,7 +40,7 @@ class lpr {
 
 		$files = array();
 		foreach($this->files as $file) {
-			$files[] = escapeshellarg($files);
+			$files[] = escapeshellarg($file);
 		}
 
 		$output = array();
