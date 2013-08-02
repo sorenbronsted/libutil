@@ -38,9 +38,14 @@ class lpr {
 		if(!is_null($this->data['username']))
 			$args[] = '-U '.escapeshellarg($this->data['username']);
 
+		$files = array();
+		foreach($this->files as $file) {
+			$files[] = escapeshellarg($files);
+		}
+
 		$output = array();
 		$error_file = sys_get_temp_dir().DIRECTORY_SEPARATOR.mt_rand().'.lpr';
-		exec($cmd = 'lpr '.implode(' ', $args).' '.implode(' ', $this->files).'  2> '.$error_file, $output, $return_var);
+		exec($cmd = 'lpr '.implode(' ', $args).' '.implode(' ', $files).'  2> '.$error_file, $output, $return_var);
 		
 		syslog(E_NOTICE, 'CMD: '.$cmd);
 
