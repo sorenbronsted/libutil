@@ -1,9 +1,9 @@
 <?php
-require_once 'PHPUnit/Autoload.php';
+/*require_once 'PHPUnit/Autoload.php';
 require_once 'test/settings.php';
 
 class lprTest extends PHPUnit_Framework_TestCase {
-	/*public function testPrinterConfiguration() {
+	public function testPrinterConfiguration() {
 		$error_file = tempnam(sys_get_temp_dir(), 'lpr');
 
 		exec('lpr  2> '.$error_file);
@@ -12,5 +12,5 @@ class lprTest extends PHPUnit_Framework_TestCase {
 		@unlink($error_file);
 
 		$this->assertTrue($content != 'lpr: Error - no default destination available.');
-	}*/
-}
+	}
+}*/
