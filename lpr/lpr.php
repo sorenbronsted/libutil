@@ -2,6 +2,7 @@
 class lpr {
 	private $data = array(
 		'paper_size' => 'A4',
+		'tray' => 'Tray3',
 		'username' => null,
 		'hostname' => null,
 		'port' => null,
@@ -13,7 +14,10 @@ class lpr {
 	public function __construct($files) {
 		if(is_array($files)) {
 			$this->files = $files;
-		} else $this->files = array($files);
+		}
+		else {
+			$this->files = array($files);
+		}
 
 		foreach($this->files as $file) {
 			if(!file_exists($file)) {
@@ -24,7 +28,7 @@ class lpr {
 
 	public function exec() {
 		$args = array(
-			'-o media='.escapeshellarg($this->data['paper_size']),
+			'-o media='.escapeshellarg($this->data['paper_size'].','.$this->data['tray']),
 			'-# '.escapeshellarg($this->data['copies']),
 			'-T "Job '.mt_rand().'"',
 		);
@@ -59,15 +63,11 @@ class lpr {
 		return true;
 	}
 
-	public function __set($x, $y) {
-		if(isset($this->data[$x])) {
-			$this->data[$x] = $y;
-			return true;
-		}
-		throw new Exception('Variable '.$x.' does not exists.');
+	public function __set($name, $value) {
+		$this->data[$name] = $value;
 	}
 
-	public function __get($x) {
-		return (isset($this->data[$x]) ? $this->data[$x] : null);
+	public function __get($name) {
+		return (isset($this->data[$name]) ? $this->data[$name] : null);
 	}
 }
