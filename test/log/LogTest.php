@@ -34,6 +34,10 @@ class LogTest extends PHPUnit_Framework_TestCase {
 		$log->info($this, "test1");
 		$this->assertEquals("", TestWriter::$buffer);
 	}
+	
+	public function testFileWriter() {
+		
+	}
 }
 
 ?>
