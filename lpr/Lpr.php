@@ -1,5 +1,5 @@
 <?php
-class lpr {
+class Lpr {
 	private $data = array(
 		'paper_size' => 'A4',
 		'tray' => 'Tray3',
