@@ -24,7 +24,7 @@ class Log {
 	
 	/*
 	 * This will create a log object where default level is error and output to console
-	 * $defaultLevel: can 4 four level ranging from Error to Debug
+	 * $defaultLevel: a 4 four level ranging from Error to Debug
 	 * $writer: is the of the writer class to use, which must implement LogWriter
 	 */
 	public function __construct($defaultLevel = Log::ERROR, $writer = "ConsoleWriter") {
@@ -45,14 +45,17 @@ class Log {
 	 *   [log]
 	 *     defaultlevel = 0 #this error level
 	 *     writer = SomeWriter
-	 *     debug[] = TestClass1
-	 *     debug[] = TestClass2
-	 *     error[] = TestClass1
+	 *     debug[] = TestClass1,TestClass10
+	 *     info[] = TestClass2
+	 *     error[] = TestClass3
 	 */
 	public static function createFromConfig() {
 		$result = new Log();
 		
 		$config = DiContainer::instance()->config;
+		if ($config == null) {
+			throw new Exception("Config in DiContainer is not set");
+		}
 		
 		$tmp = $config->log_defaultLevel;
 		if ($tmp != null) {
@@ -96,8 +99,8 @@ class Log {
 	 * $from: the calling object
 	 * $text: the message.
 	 */
-	public function debug($from, $text) {
-		$this->write(self::DEBUG, get_class($from), $text);
+	public function debug($class, $text) {
+		$this->write(self::DEBUG, $class, $text);
 	}
 
 	/*
@@ -105,8 +108,8 @@ class Log {
 	 * $from: the calling object
 	 * $text: the message.
 	 */
-	public function warn($from, $text) {
-		$this->write(self::WARN, get_class($from), $text);
+	public function warn($class, $text) {
+		$this->write(self::WARN, $class, $text);
 	}
 
 	/*
@@ -114,8 +117,8 @@ class Log {
 	 * $from: the calling object
 	 * $text: the message.
 	 */
-	public function error($from, $text) {
-		$this->write(self::ERROR, get_class($from), $text);
+	public function error($class, $text) {
+		$this->write(self::ERROR, $class, $text);
 	}
 
 	/*
@@ -123,8 +126,8 @@ class Log {
 	 * $from: the calling object
 	 * $text: the message.
 	 */
-	public function info($from, $text) {
-		$this->write(self::INFO, get_class($from), $text);
+	public function info($class, $text) {
+		$this->write(self::INFO, $class, $text);
 	}
 	
 	/*
