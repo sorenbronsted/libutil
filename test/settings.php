@@ -1,16 +1,21 @@
 <?php
 
-$paths = array(
-  "di",
-  "config",
-  "log",
-  "test/log",
-);
-
-set_include_path(get_include_path().":".implode(':', $paths));
-
 spl_autoload_register(function($class) {
-  require("$class.php");
+	$paths = array(
+		"di",
+		"config",
+		"log",
+		"test/log",
+	);
+
+	foreach($paths as $path) {
+		$fullname = $path.'/'.$class.'.php';
+		if (is_file($fullname)) {
+			include($fullname);
+			return true;
+		}
+	}
+	return false;
 });
 
 ?>

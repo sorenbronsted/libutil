@@ -1,5 +1,4 @@
 <?php
-require_once 'PHPUnit/Autoload.php';
 require_once 'test/settings.php';
 
 class ConfigTest extends PHPUnit_Framework_TestCase {
@@ -9,6 +8,12 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("section1_var1", $c->section1_var1);
 		$this->assertEquals("section2_var2", $c->section2_var2);
 		$this->assertEquals(null, $c->nosection_novar);
+  }
+	
+  public function testGetBoolean() {
+		$c = new Config2("test/config/test.ini");
+		$this->assertEquals(true, $c->boolean_var1);
+		$this->assertEquals(false, $c->boolean_var2);
   }
 	
   public function testGetFails() {
