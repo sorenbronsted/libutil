@@ -50,7 +50,8 @@ class Log {
 	 *     error[] = TestClass3
 	 */
 	public static function createFromConfig() {
-		$result = new Log();
+		$class = get_called_class();
+		$result = new $class();
 		
 		$config = DiContainer::instance()->config;
 		if ($config == null) {
