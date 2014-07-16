@@ -12,15 +12,15 @@ class Log {
 	const INFO  = 2;
 	const DEBUG = 3;
 
-	private static $levelTexts = array(
+	protected static $levelTexts = array(
 		self::ERROR => 'error',
 		self::WARN  => 'warn',
 		self::INFO  => 'info',
 		self::DEBUG => 'debug'
 	);
-	private $levels = null;
-	private $defaultLevel = null;
-	private $writer = null;
+	protected $levels = null;
+	protected $defaultLevel = null;
+	protected $writer = null;
 	
 	/*
 	 * This will create a log object where default level is error and output to console
@@ -145,7 +145,7 @@ class Log {
 		$this->levels[$level][] = $class;
 	}
 	
-	private function write($level, $class, $text) {
+	protected function write($level, $class, $text) {
 		if (in_array($class, $this->levels[$level]) || $this->defaultLevel >= $level) {
 			$this->writer->write(self::$levelTexts[$level], $class, $text);
 		}
