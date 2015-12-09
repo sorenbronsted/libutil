@@ -1,6 +1,11 @@
 {
   "name": "ufds/libutil",
   "description": "Package of utils",
-  "license": "UFDS privat"
+  "license": "UFDS privat",
+
+  "autoload": {
+    "classmap": ["config/", "di/", "log/", "lpr/"]
+  }
+
 }
 
