@@ -1,25 +1,19 @@
-.PHONY:	dist clean test checkout coverage depend update.depend
+.PHONY:	clean test coverage depend update-depend
 
 SHELL=/bin/bash
 
-all: checkout depend clean coverage
+all: depend clean coverage
 	echo "Up-to-date"
-
-dist:	
-	bin/dist.sh
 
 clean:
 	rm -fr dist
 	bin/clean.sh
 
 test:
-	php bin/phpunit.phar test
-
-checkout:
-	git pull
+	bin/phpunit.phar test
 
 coverage:
-	phpunit --coverage-html doc/coverage test
+	bin/phpunit.phar --coverage-html doc/coverage test
 
 depend:
 	bin/depend.sh install
