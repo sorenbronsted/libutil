@@ -21,7 +21,7 @@ class Lpr {
 
 		foreach($this->files as $file) {
 			if(!file_exists($file)) {
-				throw new Exception('Der er en fil som blev brugt som argument til '.__CLASS__.' som ikke findes. File er: '.$file);
+				throw new Exception('File not found: '.$file);
 			}
 		}
 	}
@@ -44,14 +44,14 @@ class Lpr {
 
 		$files = array();
 		foreach($this->files as $file) {
-			$files[] = escapeshellarg($file);
+			$files[] = '"'.$file.'"';
 		}
 
 		$output = array();
 		$error_file = sys_get_temp_dir().DIRECTORY_SEPARATOR.mt_rand().'.lpr';
-		exec($cmd = 'lpr '.implode(' ', $args).' '.implode(' ', $files).'  2> '.$error_file, $output, $return_var);
-		
-		syslog(E_NOTICE, 'CMD: '.$cmd);
+		$cmd = 'lpr '.implode(' ', $args).' '.implode(' ', $files).'  2> '.$error_file;
+		syslog(LOG_DEBUG, 'CMD: '.$cmd);
+		exec($cmd, $output, $return_var);
 
 		$error = trim(file_get_contents($error_file));
 
