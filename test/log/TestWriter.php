@@ -8,5 +8,3 @@ class TestWriter implements LogWriter {
 		self::$buffer = sprintf("$level:$class: $text");
 	}
 }
-
-?>

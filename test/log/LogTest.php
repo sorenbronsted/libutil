@@ -9,7 +9,7 @@ require_once 'test/settings.php';
 class LogTest extends PHPUnit_Framework_TestCase {
 	
 	public function testLogError() {
-		$log = new Log(Log::ERROR, "TestWriter");
+		$log = new Log(Log::ERROR, "ufds\TestWriter");
 		$log->error(__CLASS__, "test1");
 		$this->assertEquals("error:LogTest: test1", TestWriter::$buffer);
 		TestWriter::$buffer = "";
@@ -18,7 +18,7 @@ class LogTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testLogDebug() {
-		$log = new Log(Log::DEBUG, "TestWriter");
+		$log = new Log(Log::DEBUG, "ufds\TestWriter");
 		$log->error(__CLASS__, "test1");
 		$this->assertEquals("error:LogTest: test1", TestWriter::$buffer);
 		TestWriter::$buffer = "";
@@ -38,10 +38,4 @@ class LogTest extends PHPUnit_Framework_TestCase {
 		$log->info(__CLASS__, "test1");
 		$this->assertEquals("", TestWriter::$buffer);
 	}
-	
-	public function testFileWriter() {
-		
-	}
 }
-
-?>
