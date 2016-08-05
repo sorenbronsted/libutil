@@ -1,4 +1,7 @@
 <?php
+
+namespace ufds;
+
 class Lpr {
 	private $data = array(
 		'paper_size' => 'A4',

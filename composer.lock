@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "83c2da54e3abd92d2878584f84f697b7",
+    "content-hash": "8ef5b52ac7a94055638752785ef9aeb2",
+    "packages": [
+        {
+            "name": "ufds/libcommon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "http://dev/git/ufds/libcommon.git",
+                "reference": "2037825cbb27982ae55ef473002a76001293167f"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ufds\\": [
+                        "common/"
+                    ]
+                }
+            },
+            "license": [
+                "UFDS privat"
+            ],
+            "description": "UFDS common library",
+            "time": "2016-08-05 10:56:09"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "ufds/libcommon": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "5.4"
+    }
+}

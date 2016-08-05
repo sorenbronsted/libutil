@@ -2,10 +2,27 @@
   "name": "ufds/libutil",
   "description": "Package of utils",
   "license": "UFDS privat",
-
+  "config": {
+    "platform": {
+      "php": "5.4"
+    },
+    "secure-http": false
+  },
   "autoload": {
-    "classmap": ["config/", "di/", "log/", "lpr/"]
-  }
-
+    "psr-4": {
+      "ufds\\": [
+        "config/",
+        "di/",
+        "log/",
+        "lpr/"
+      ]
+    }
+  },
+  "require": {
+    "ufds/libcommon": "dev-master"
+  },
+  "repositories": [
+    { "type": "vcs","url": "http://dev/git/ufds/libcommon.git"}
+  ]
 }
 

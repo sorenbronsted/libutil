@@ -1,5 +1,7 @@
 <?php
 
+namespace ufds;
+
 class FileWriter implements LogWriter {
 	private $fh;
 	
@@ -18,5 +20,3 @@ class FileWriter implements LogWriter {
 		fwrite($this->fh, "$level:$class: $text\n");
 	}
 }
-
-?>

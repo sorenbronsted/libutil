@@ -1,6 +1,8 @@
 <?php
 require_once 'test/settings.php';
 
+use ufds\Config2;
+
 class ConfigTest extends PHPUnit_Framework_TestCase {
   
   public function testGet() {

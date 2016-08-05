@@ -1,5 +1,7 @@
 <?php
 
+namespace ufds;
+
 class Config2 {
 	private $values = null;
 	
@@ -14,21 +16,19 @@ class Config2 {
 
 		$names = explode('_', $name);
 		if (count($names) < 2) {
-			throw new RuntimeException("Wrong format for config names");
+			throw new \RuntimeException("Wrong format for config names");
 		}
 		return isset($this->values[$names[0]][$names[1]]) ? $this->values[$names[0]][$names[1]] : null;
 	}
 	
 	private function load($file) {
 		if (!file_exists($file)) {
-			throw new RuntimeException($file." not found");
+			throw new \RuntimeException($file." not found");
 		}
 		
 		$this->values = parse_ini_file($file, true);
 		if ($this->values === false) {
-			throw new RuntimeException("Could not read configuration");
+			throw new \RuntimeException("Could not read configuration");
 		}
 	}
 }
-
-?>

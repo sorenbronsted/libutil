@@ -1,5 +1,7 @@
 <?php
 
+namespace ufds;
+
 /* Dependency Injection Container
  * In some commen place eg settings populate this DiContianer with values which
  * the application rely on.
@@ -27,5 +29,3 @@ class DiContainer {
     $this->objects = array();
   }
 }
-
-?>

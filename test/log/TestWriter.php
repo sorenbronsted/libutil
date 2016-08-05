@@ -1,4 +1,5 @@
 <?php
+namespace ufds;
 
 class TestWriter implements LogWriter {
 	public static $buffer;

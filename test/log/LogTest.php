@@ -1,4 +1,9 @@
 <?php
+use ufds\Config2;
+use ufds\DiContainer;
+use ufds\Log;
+use ufds\TestWriter;
+
 require_once 'test/settings.php';
 
 class LogTest extends PHPUnit_Framework_TestCase {

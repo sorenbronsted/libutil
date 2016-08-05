@@ -1,4 +1,5 @@
 <?php
+namespace ufds;
 
 class SyslogWriter implements LogWriter {
 	public function write($level, $class, $text) {
@@ -6,4 +7,3 @@ class SyslogWriter implements LogWriter {
 	}
 }
 
-?>

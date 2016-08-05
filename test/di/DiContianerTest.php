@@ -1,4 +1,7 @@
 <?php
+
+use ufds\DiContainer;
+
 require_once 'test/settings.php';
 
 class DiContainerTest extends PHPUnit_Framework_TestCase {
