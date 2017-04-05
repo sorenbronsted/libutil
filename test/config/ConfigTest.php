@@ -38,6 +38,22 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 			$this->assertContains("not found", $e->getMessage());
 		}
 	}
-}
 
-?>
+	public function testSet() {
+		$c = new Config2("test/config/test.ini");
+		$c->new_value = 'hej';
+		$this->assertEquals('hej', $c->new_value);
+	}
+
+	public function testSetFails() {
+		$c = new Config2("test/config/test.ini");
+		try {
+			$c->var1 = 'x';
+			$this->fails("Expected an exception");
+		}
+		catch(RuntimeException $e) {
+			$this->assertContains("format", $e->getMessage());
+		}
+	}
+
+}
