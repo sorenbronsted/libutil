@@ -36,7 +36,7 @@ class Config2 {
 		}
 	}
 
-	private function getNames($name): array {
+	private function getNames($name) {
 		$names = explode('_', $name);
 		if (count($names) < 2) {
 			throw new RuntimeException("Wrong format for config names");
