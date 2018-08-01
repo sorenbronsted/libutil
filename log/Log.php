@@ -8,6 +8,8 @@ namespace ufds;
  * The log level is numbered so that level ERROR will only writes error
  * messages, level WARN will right  error and warning messages and so fourth.
  */
+use Exception;
+
 class Log {
 	const ERROR = 0;
 	const WARN  = 1;

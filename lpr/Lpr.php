@@ -2,6 +2,8 @@
 
 namespace ufds;
 
+use Exception;
+
 class Lpr {
 	private $data = array(
 		'paper_size' => 'A4',
