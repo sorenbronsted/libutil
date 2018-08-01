@@ -1,10 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use ufds\DiContainer;
 
 require_once 'test/settings.php';
 
-class DiContainerTest extends PHPUnit_Framework_TestCase {
+class DiContainerTest extends TestCase {
   
   protected function setUp() {
     DiContainer::instance()->value = 1;

@@ -1,4 +1,6 @@
 <?php
+
+use PHPUnit\Framework\TestCase;
 use ufds\Config2;
 use ufds\DiContainer;
 use ufds\Log;
@@ -6,7 +8,7 @@ use ufds\TestWriter;
 
 require_once 'test/settings.php';
 
-class LogTest extends PHPUnit_Framework_TestCase {
+class LogTest extends TestCase {
 	
 	public function testLogError() {
 		$log = new Log(Log::ERROR, "ufds\TestWriter");

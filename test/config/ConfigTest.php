@@ -1,9 +1,10 @@
 <?php
 require_once 'test/settings.php';
 
+use PHPUnit\Framework\TestCase;
 use ufds\Config2;
 
-class ConfigTest extends PHPUnit_Framework_TestCase {
+class ConfigTest extends TestCase {
   
   public function testGet() {
 		$c = new Config2("test/config/test.ini");

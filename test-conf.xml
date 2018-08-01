@@ -23,11 +23,11 @@
             <directory suffix=".php">di</directory>
             <directory suffix=".php">log</directory>
             <directory suffix=".php">lpr</directory>
+            <exclude>
+                <directory>vendor</directory>
+                <directory>test</directory>
+            </exclude>
         </whitelist>
-        <exclude>
-            <directory>vendor</directory>
-            <directory>test</directory>
-        </exclude>
     </filter>
     <php>
         <ini name="memory_limit" value="2048M"/>
