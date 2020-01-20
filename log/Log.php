@@ -1,6 +1,6 @@
 <?php
 
-namespace ufds;
+namespace sbronsted;
 
 /*
  * This Log class writes information to a LogWriter.
@@ -31,7 +31,7 @@ class Log {
 	 * $defaultLevel: a 4 four level ranging from Error to Debug
 	 * $writer: is the of the writer class to use, which must implement LogWriter
 	 */
-	public function __construct($defaultLevel = Log::ERROR, $writer = "ufds\ConsoleWriter") {
+	public function __construct($defaultLevel = Log::ERROR, $writer = ConsoleWriter::class) {
 		$this->defaultLevel = $defaultLevel;
 		$this->writer = new $writer;
 		$this->levels = array();

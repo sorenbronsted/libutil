@@ -1,6 +1,6 @@
 <?php
 
-namespace ufds;
+namespace sbronsted;
 
 use RuntimeException;
 
@@ -27,7 +27,7 @@ class Config2 {
 
 	private function load($file) {
 		if (!file_exists($file)) {
-			throw new \RuntimeException($file." not found");
+			throw new RuntimeException($file." not found");
 		}
 		
 		$this->values = parse_ini_file($file, true);

@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 class SyslogWriter implements LogWriter {
 	public function write($level, $class, $text) {

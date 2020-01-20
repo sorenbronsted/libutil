@@ -1,13 +1,13 @@
 <?php
+namespace sbronsted;
 
 use PHPUnit\Framework\TestCase;
-use ufds\DiContainer;
 
 require_once 'test/settings.php';
 
 class DiContainerTest extends TestCase {
   
-  protected function setUp() {
+  protected function setUp() : void {
     DiContainer::instance()->value = 1;
   }
   

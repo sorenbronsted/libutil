@@ -1,8 +1,9 @@
 <?php
+namespace sbronsted;
 require_once 'test/settings.php';
 
 use PHPUnit\Framework\TestCase;
-use ufds\Config2;
+use RuntimeException;
 
 class ConfigTest extends TestCase {
   
@@ -23,10 +24,10 @@ class ConfigTest extends TestCase {
 		$c = new Config2("test/config/test.ini");
 		try {
 			$c->var1;
-			$this->fails("Expected an exception");
+			$this->fail("Expected an exception");
 		}
 		catch(RuntimeException $e) {
-			$this->assertContains("format", $e->getMessage());
+			$this->assertStringContainsString("format", $e->getMessage());
 		}
   }
 	
@@ -36,7 +37,7 @@ class ConfigTest extends TestCase {
 			$this->fail("Exception expected");
 		}
 		catch (RuntimeException $e) {
-			$this->assertContains("not found", $e->getMessage());
+			$this->assertStringContainsString("not found", $e->getMessage());
 		}
 	}
 
@@ -50,10 +51,10 @@ class ConfigTest extends TestCase {
 		$c = new Config2("test/config/test.ini");
 		try {
 			$c->var1 = 'x';
-			$this->fails("Expected an exception");
+			$this->fail("Expected an exception");
 		}
 		catch(RuntimeException $e) {
-			$this->assertContains("format", $e->getMessage());
+			$this->assertStringContainsString("format", $e->getMessage());
 		}
 	}
 

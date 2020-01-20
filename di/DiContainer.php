@@ -1,6 +1,6 @@
 <?php
 
-namespace ufds;
+namespace sbronsted;
 
 /* Dependency Injection Container
  * In some commen place eg settings populate this DiContianer with values which

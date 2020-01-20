@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 class ConsoleWriter implements LogWriter {
 	public function write($level, $class, $text) {
