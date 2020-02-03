@@ -1,1 +1,1 @@
-This is a bundle of utililties for the other libraries
+This is a bundle of utilities for the other libraries

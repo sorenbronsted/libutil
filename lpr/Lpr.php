@@ -1,9 +1,11 @@
 <?php
-
 namespace sbronsted;
 
 use Exception;
 
+/**
+ * Class Lpr prints to some files to lpr
+ */
 class Lpr {
 	private $data = array(
 		'paper_size' => 'A4',

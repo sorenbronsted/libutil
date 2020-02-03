@@ -27,7 +27,7 @@
     }
   },
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "sbronsted/libcommon": "^3.1"
   },
   "require-dev": {

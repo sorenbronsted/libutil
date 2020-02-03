@@ -1,15 +1,28 @@
 <?php
-
 namespace sbronsted;
 
-/*
- * This Log class writes information to a LogWriter.
- * What is written is dependent on which level is configurered with.
- * The log level is numbered so that level ERROR will only writes error
- * messages, level WARN will right  error and warning messages and so fourth.
- */
 use Exception;
 
+/**
+ * Class Log writes information to a LogWriter. The log level are numbered so that ERROR i lowest and DEBUG is highest,
+ * and the output i written only if the given level <= the default level.
+ * It depends on the Config object in the DiContainer.
+ * Usage:
+ * ```
+ * $dic = DiContainer::instance();
+ * $dic->log = Log::createFromConfig();
+ * ```
+ * Ini file configuration:
+ * ```
+ * [log]
+ * defaultLevel = error # default level is error and must be error|warn|info|debug
+ * writer = SomeWriter # default writer i ConsoleWriter
+ * # optional setting different loglevel on for different classes
+ * debug[] = TestClass1,TestClass10
+ * info[] = TestClass2
+ * error[] = TestClass3
+ * ```
+ */
 class Log {
 	const ERROR = 0;
 	const WARN  = 1;
@@ -25,35 +38,29 @@ class Log {
 	protected $levels = null;
 	protected $defaultLevel = null;
 	protected $writer = null;
-	
-	/*
-	 * This will create a log object where default level is error and output to console
-	 * $defaultLevel: a 4 four level ranging from Error to Debug
-	 * $writer: is the of the writer class to use, which must implement LogWriter
+
+	/**
+	 * Log constructor.
+	 * @param int $defaultLevel
+	 * 	The log level
+	 * @param string $writer
+	 * 	The writer class
 	 */
 	public function __construct($defaultLevel = Log::ERROR, $writer = ConsoleWriter::class) {
 		$this->defaultLevel = $defaultLevel;
 		$this->writer = new $writer;
-		$this->levels = array();
-		$this->levels[self::ERROR] = array();
-		$this->levels[self::WARN]  = array();
-		$this->levels[self::INFO]  = array();
-		$this->levels[self::DEBUG] = array();
+		$this->levels = [
+			self::ERROR => [],
+			self::WARN => [],
+			self::INFO => [],
+			self::DEBUG => [],
+		];
 	}
-	
-	/*
-	 * This will create a log object and configure it from config object
-	 * which is loaded from DiContainer.
-	 * It is expected that the configuration has a log section in the ini file,
-	 * and all entries are optional.
-	 *   [log]
-	 *     defaultlevel = 0 #this error level
-	 *     writer = SomeWriter
-	 *     debug[] = TestClass1,TestClass10
-	 *     info[] = TestClass2
-	 *     error[] = TestClass3
+
+	/**
+	 * This will read settings from Config2
 	 */
-	public static function createFromConfig() {
+	public static function createFromConfig() : Log {
 		$class = get_called_class();
 		$result = new $class();
 		
@@ -98,49 +105,60 @@ class Log {
 		
 		return $result;
 	}
-	
-	/*
-	 * Write on debug level.
-	 * $from: the calling object
-	 * $text: the message.
+
+	/**
+	 * Write a debug message
+	 * @param string $class
+	 * 	The calling class
+	 * @param string $text
+	 *  The text to print
 	 */
-	public function debug($class, $text) {
+	public function debug(string $class, string $text) : void {
 		$this->write(self::DEBUG, $class, $text);
 	}
 
-	/*
-	 * Write on warning level.
-	 * $from: the calling object
-	 * $text: the message.
+	/**
+	 * Write a warn message
+	 * @param string $class
+	 * 	The calling class
+	 * @param string $text
+	 *  The text to print
 	 */
-	public function warn($class, $text) {
+	public function warn(string $class, string $text) : void {
 		$this->write(self::WARN, $class, $text);
 	}
 
-	/*
-	 * Write on error level.
-	 * $from: the calling object
-	 * $text: the message.
+	/**
+	 * Write a error message
+	 * @param string $class
+	 * 	The calling class
+	 * @param string $text
+	 *  The text to print
 	 */
-	public function error($class, $text) {
+	public function error(string $class, string $text) : void {
 		$this->write(self::ERROR, $class, $text);
 	}
 
-	/*
-	 * Write on info level.
-	 * $from: the calling object
-	 * $text: the message.
+	/**
+	 * Write a info message
+	 * @param string $class
+	 * 	The calling class
+	 * @param string $text
+	 *  The text to print
 	 */
-	public function info($class, $text) {
+	public function info(string $class, string $text) : void {
 		$this->write(self::INFO, $class, $text);
 	}
 	
-	/*
-	 * Adds log level for a class name
-	 * $level: can 4 four level ranging from Error to Debug
-	 * $class: the class name for this level
+	/**
+	 * Add a class to a level programmatically
+	 * @param int $level
+	 *  The log level
+	 * @param string $class
+	 *  The name of the class to log at the given level
+	 * @throws IllegalArgumentException
 	 */
-	public function add($level, $class) {
+	public function add(int $level, string $class) {
 		if ($level < self::ERROR || $level > self::DEBUG) {
 			throw new IllegalArgumentException("level", __FILE__, __LINE__);
 		}
